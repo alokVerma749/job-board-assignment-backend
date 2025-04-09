@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
 import User from '../models/user.js';
 
 export const login = async (req, res) => {
@@ -29,10 +28,11 @@ export const login = async (req, res) => {
       { expiresIn: '6h' }
     );
 
-    res.cookie('token', token, {
+    res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 6000,
+      secure: process.env.NODE_ENV === "production",
+      // sameSite: "None", // TODO
+      maxAge: 6 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
@@ -49,7 +49,7 @@ export const login = async (req, res) => {
     console.error(error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
-}
+};
 
 export const register = async (req, res) => {
   const { firstname, lastname, email, phone, location, bio, password } = req.body;
