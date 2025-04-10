@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", process.env.FRONTENDDOMAIN],
+    origin: ["http://localhost:5173", process.env.VITE_FRONTENDDOMAIN],
     credentials: true,
   })
 );
